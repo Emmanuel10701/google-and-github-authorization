@@ -1,13 +1,9 @@
-import SessionProviderWrapper from "./SessionProviderWrapper";
+"use client"; // This component must be a client component
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <SessionProviderWrapper>
-          {children}
-        </SessionProviderWrapper>
-      </body>
-    </html>
-  );
-}
+import { SessionProvider } from 'next-auth/react';
+
+const SessionProviderWrapper = ({ children }) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+
+export default SessionProviderWrapper;

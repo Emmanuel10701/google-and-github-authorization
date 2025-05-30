@@ -19,7 +19,7 @@ export default function Login() {
 
   const handleOAuthLogin = async (provider) => {
     setLoadingProvider(provider);
-    await signIn(provider, { callbackUrl: "/chat" });
+    await signIn(provider, { callbackUrl: "/" });
     setLoadingProvider("");
   };
 
