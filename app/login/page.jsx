@@ -13,13 +13,13 @@ export default function Login() {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/"); // Redirect authenticated users to /chat
+      router.push("/chat");
     }
   }, [status, router]);
 
   const handleOAuthLogin = async (provider) => {
     setLoadingProvider(provider);
-    await signIn(provider, { callbackUrl: "/" });
+    await signIn(provider, { callbackUrl: "/chat" });
     setLoadingProvider("");
   };
 
