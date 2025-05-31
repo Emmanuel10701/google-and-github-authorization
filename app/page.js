@@ -43,9 +43,6 @@ export default function LandingPage() {
   // Helper to get provider name from session
   const getProviderName = () => {
     if (!session) return null;
-    // NextAuth stores provider in session.token if using callbacks, otherwise not directly available.
-    // If you want to store provider info, add it in the NextAuth callbacks.
-    // For demo, try to infer from email domain or name:
     if (session.user?.email?.includes("gmail.com")) return "Google";
     if (session.user?.login || session.user?.email?.includes("github.com")) return "GitHub";
     return "OAuth Provider";
@@ -68,42 +65,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Top User Card */}
-      <div className="bg-white shadow-md rounded-b-2xl px-4 py-4 sm:px-8 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-gray-200">
-        <div className="flex items-center gap-4">
-          {user?.image ? (
-            <img
-              src={user.image}
-              alt="User avatar"
-              className="w-14 h-14 rounded-full border"
-            />
-          ) : (
-            <FaUserCircle className="w-14 h-14 text-gray-400" />
-          )}
-          <div>
-            <div className="font-bold text-lg sm:text-xl text-gray-800 flex items-center gap-2">
-              {user?.name || user?.email || "User"}
-              <span className="text-xs sm:text-sm px-2 py-1 bg-indigo-100 text-indigo-700 rounded ml-2">
-                {providerName}
-              </span>
-            </div>
-            <div className="text-gray-500 text-sm">{user?.email}</div>
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-2">
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-sm font-semibold"
-          >
-            <FaSignOutAlt /> Logout
-          </button>
-          <button
-            onClick={handleLoginRedirect}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition text-sm font-semibold"
-          >
-            Integrate Another Provider
-          </button>
-        </div>
-      </div>
+    
 
       {/* Header */}
       <header className="bg-indigo-800 text-white py-5 shadow-lg">
@@ -140,6 +102,46 @@ export default function LandingPage() {
           </nav>
         </div>
       </header>
+
+
+
+
+        <div className="bg-white shadow-md rounded-b-2xl px-4 py-4 sm:px-8 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-gray-200">
+        <div className="flex items-center gap-4">
+          {user?.image ? (
+            <img
+              src={user.image}
+              alt="User avatar"
+              className="w-14 h-14 rounded-full border"
+            />
+          ) : (
+            <FaUserCircle className="w-14 h-14 text-gray-400" />
+          )}
+          <div>
+            <div className="font-bold text-lg sm:text-xl text-gray-800 flex items-center gap-2">
+              {user?.name || user?.email || "User"}
+              <span className="text-xs sm:text-sm px-2 py-1 bg-indigo-100 text-indigo-700 rounded ml-2">
+                {providerName}
+              </span>
+            </div>
+            <div className="text-gray-500 text-sm">{user?.email}</div>
+          </div>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200 transition text-sm font-semibold"
+          >
+            <FaSignOutAlt /> Logout
+          </button>
+          <button
+            onClick={handleLoginRedirect}
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 transition text-sm font-semibold"
+          >
+            Integrate Another Provider
+          </button>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <main className="flex-grow bg-gray-100">
